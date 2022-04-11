@@ -1,0 +1,122 @@
+<!--Display gif-->
+<html>
+<head>
+<title>Gif</title>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<div class="jumbotron">
+<p>
+    <!--Diplay a centered gif hidden-->
+    <img src="shaggy-carl.gif" alt="gif" id="gif" width="100%" style="display:none">
+    <!--Make the gif grow and shrink-->
+    <script>
+    function moveIt() {
+        var gif = document.getElementById("gif");
+    var size = 100;
+    async function grow(){
+        for (var i = 0; i < 10; i++) {
+            size += 1;
+            // gif.style.width = size + "%";
+            gif.style.height = size + "%";
+            // add delay using a Promise
+            if (i != 9) {
+                await new Promise(resolve => setTimeout(resolve, 5));
+            }
+        }
+    }
+    async function shrink(){
+        for (var i = 0; i < 10; i++) {
+            size -= 1;
+            // gif.style.width = size + "%";
+            gif.style.height = size + "%";
+            // add delay using a Promise
+            if (i != 9) {
+                await new Promise(resolve => setTimeout(resolve, 5));
+            }
+        }
+
+    }
+
+    var growing = false;
+    async function growShrink(){
+        while (true) {
+        if (!growing) {
+            while(size > 10) {
+                await shrink();
+            }
+            growing = true;
+        } else {
+            while(size < 100) {
+                await grow();
+            }
+            growing = false;
+        }
+        await new Promise(resolve => setTimeout(resolve, 50));
+        }
+    }
+    growShrink();
+    }
+    
+    </script>
+
+
+    <!--Rotate the gif-->
+    <script>
+    function rotate() {
+        var img = document.getElementById("gif");
+        var angle = 0;
+        setInterval(function(){
+            angle += 3;
+            img.style.transform = "rotate(" + angle + "deg)";
+        }, 10);
+    }
+    
+    </script>
+    
+</p>
+
+<!--Make the background changing colors-->
+<script>
+    function activateColors() {
+        var colors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"];
+        var index = 0;
+        setInterval(function(){
+            document.body.style.backgroundColor = colors[index];
+            index++;
+            if (index == colors.length) {
+                index = 0;
+            }
+        }, 10);
+    }
+</script>
+
+<script>
+    function playAudio() {
+        var audio = new Audio('song.mp3');
+        audio.play();
+        audio.controls = false;
+        audio.volume = 1;
+        audio.playbackRate = 2;
+    }
+    function doEverything() {
+        document.getElementById("buttonPlayer").style.display = "none";
+        document.getElementById("gif").style.display = "block";
+        playAudio();
+        activateColors();
+        moveIt();
+        rotate();
+    }
+    
+</script>
+
+<!--Add large button to play mp3-->
+<button type="button" id="buttonPlayer" class="btn btn-primary btn-lg" onclick="doEverything()" style="font-size: 100pt;">CLICK ME</button>
+
+
+
+
+</body>
+</html>

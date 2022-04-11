@@ -101,6 +101,11 @@
         audio.controls = false;
         audio.volume = 1;
         audio.playbackRate = 2;
+        // Make the song loop
+        audio.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
     }
     function doEverything() {
         document.getElementById("buttonPlayer").style.display = "none";

@@ -11,12 +11,22 @@
 <div class="jumbotron">
 <p>
     <!--Diplay a centered gif hidden-->
-    <img src="shaggy-carl.gif" alt="gif" id="gif" width="100%" style="display:none">
+    <div draggable="true"> 
+        <img draggable="false" src="shaggy-carl.gif" alt="gif" id="gif" width="100%" style="display:none"> 
+    </div>
     <style>
     #gif {
         /* center the gif */
         margin-left:auto;
         margin-right:auto;
+        pointer-events: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+        -o-user-drag: none;
     }
     </style>
     <!--Make the gif grow and shrink-->
